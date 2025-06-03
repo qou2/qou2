@@ -1,0 +1,2088 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qou2 - Developer Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f5576c;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23grad1)'/%3E%3Ctext x='50' y='35' font-family='Inter, sans-serif' font-size='20' font-weight='800' text-anchor='middle' fill='white'%3Eq%3C/text%3E%3Ctext x='50' y='75' font-family='Inter, sans-serif' font-size='16' font-weight='600' text-anchor='middle' fill='url(%23grad2)'%3E2%3C/text%3E%3Ccircle cx='75' cy='25' r='4' fill='url(%23grad2)' opacity='0.8'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+        /* Click Overlay Styles */
+        #clickOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(13, 13, 27, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #clickOverlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .click-content {
+            text-align: center;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .click-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .click-content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* Main content blur effect */
+        #mainContent {
+            transition: filter 0.8s ease;
+        }
+
+        #mainContent.blurred {
+            filter: blur(10px);
+        }
+
+        /* Music controls */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .music-controls.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .music-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .music-toggle:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* CSS Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --primary: #667eea;
+            --secondary: #f093fb;
+            --dark-bg: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --dark-border: #2a2a2a;
+            --card-bg: rgba(26, 26, 26, 0.6);
+            --border: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 2rem;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        body:not(.loaded) {
+            opacity: 0;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Smooth Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: var(--primary-gradient);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Background Effects */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(79, 172, 254, 0.05) 0%, transparent 50%);
+            z-index: -3;
+            will-change: transform;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Floating Orbs */
+        .orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+            will-change: transform;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-gradient);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: var(--secondary-gradient);
+            top: 60%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .orb:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-gradient);
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -14s;
+        }
+
+        .orb:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            top: 30%;
+            right: 30%;
+            animation-delay: -21s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(-20px, -60px) rotate(180deg); }
+            75% { transform: translate(-40px, 20px) rotate(270deg); }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: drift 15s infinite linear;
+            will-change: transform;
+        }
+
+        .floating-element:nth-child(odd) {
+            background: rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Generate random positions for floating elements */
+        .floating-element:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { left: 20%; animation-delay: -2s; }
+        .floating-element:nth-child(3) { left: 30%; animation-delay: -4s; }
+        .floating-element:nth-child(4) { left: 40%; animation-delay: -6s; }
+        .floating-element:nth-child(5) { left: 50%; animation-delay: -8s; }
+        .floating-element:nth-child(6) { left: 60%; animation-delay: -10s; }
+        .floating-element:nth-child(7) { left: 70%; animation-delay: -12s; }
+        .floating-element:nth-child(8) { left: 80%; animation-delay: -14s; }
+        .floating-element:nth-child(9) { left: 90%; animation-delay: -1s; }
+        .floating-element:nth-child(10) { left: 15%; animation-delay: -3s; }
+        .floating-element:nth-child(11) { left: 25%; animation-delay: -5s; }
+        .floating-element:nth-child(12) { left: 75%; animation-delay: -7s; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: var(--secondary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--dark-border);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .project-link:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateX(4px);
+        }
+
+        /* Social Section */
+.social-section {
+    padding: 8rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+        .social-description {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .social-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 250px;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .circular-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+.circular-button img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+        .circular-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .circular-button:hover::before {
+            opacity: 0.2;
+        }
+
+        .circular-button:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+      .social-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-card:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-card:first-child .social-icon {
+            background: linear-gradient(135deg, #5865f2, #404eed);
+        }
+
+        .social-card:last-child .social-icon {
+            background: linear-gradient(135deg, #333, #24292e);
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .social-handle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'SF Mono', Monaco, monospace;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        /* Enhanced Button Styling */
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .copy-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Discord button specific styling */
+        .social-card:first-child .copy-btn:hover {
+            background: rgba(88, 101, 242, 0.3);
+            border-color: rgba(88, 101, 242, 0.5);
+        }
+
+        /* GitHub button specific styling */
+        .social-card:last-child .copy-btn:hover {
+            background: rgba(51, 51, 51, 0.3);
+            border-color: rgba(51, 51, 51, 0.5);
+        }
+
+        /* Success state for copy button */
+        .copy-btn.copied {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.5);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .social-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .social-card {
+                padding: 2rem;
+            }
+        }
+/* Enhanced Footer */
+.footer {
+   position: relative;
+   padding: 3rem 2rem 2rem;
+   background: linear-gradient(
+       180deg,
+       transparent 0%,
+       rgba(26, 26, 26, 0.4) 30%,
+       rgba(26, 26, 26, 0.8) 100%
+   );
+   border-top: 1px solid var(--dark-border);
+   overflow: hidden;
+}
+
+/* Animated background elements */
+.footer::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   height: 1px;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   opacity: 0.6;
+   animation: pulse 2s ease-in-out infinite;
+}
+
+.footer::after {
+   content: '';
+   position: absolute;
+   top: -50%;
+   left: -20%;
+   width: 140%;
+   height: 100%;
+   background: radial-gradient(
+       ellipse at center,
+       rgba(102, 126, 234, 0.03) 0%,
+       transparent 70%
+   );
+   animation: glow 4s ease-in-out infinite alternate;
+}
+
+.footer-content {
+   position: relative;
+   z-index: 2;
+   max-width: 1200px;
+   margin: 0 auto;
+   display: grid;
+   grid-template-columns: 1fr auto 1fr;
+   align-items: center;
+   gap: 2rem;
+}
+
+.footer-left,
+.footer-right {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+.footer-right {
+   justify-content: flex-end;
+}
+
+.footer-center {
+   text-align: center;
+}
+
+.footer-content p {
+   color: var(--text-muted);
+   margin: 0.3rem 0;
+   font-size: 0.9rem;
+   transition: color 0.3s ease;
+}
+
+.footer-content p:hover {
+   color: rgba(255, 255, 255, 0.8);
+}
+
+.collaboration-text {
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   font-weight: 500;
+   font-size: 1rem;
+}
+
+.discord-handle {
+   display: inline-flex;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 0.5rem 1rem;
+   background: rgba(88, 101, 242, 0.1);
+   border: 1px solid rgba(88, 101, 242, 0.3);
+   border-radius: 20px;
+   color: #5865F2;
+   text-decoration: none;
+   font-size: 0.9rem;
+   transition: all 0.3s ease;
+   backdrop-filter: blur(10px);
+}
+
+.discord-handle:hover {
+   background: rgba(88, 101, 242, 0.2);
+   border-color: rgba(88, 101, 242, 0.5);
+   transform: translateY(-2px);
+   box-shadow: 0 4px 12px rgba(88, 101, 242, 0.2);
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1rem;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .projects, .social-section {
+                padding: 4rem 0;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .project-stats {
+                gap: 0.5rem;
+            }
+
+            .stat {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .orb {
+                opacity: 0.3;
+            }
+
+            .orb:nth-child(1) { width: 120px; height: 120px; }
+            .orb:nth-child(2) { width: 100px; height: 100px; }
+            .orb:nth-child(3) { width: 80px; height: 80px; }
+            .orb:nth-child(4) { width: 60px; height: 60px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                position: static;
+                justify-content: center;
+                margin: 1rem auto;
+                width: fit-content;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .project-stats {
+                justify-content: center;
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .orb {
+                animation: none;
+            }
+
+            .floating-element {
+                animation: none;
+                opacity: 0.1;
+            }
+        }
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--dark-border);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: translateY(50px);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.modal-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.modal-badge {
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;  /* Changed from 'right: 1rem' to 'left: 1rem' */
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-gradient);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.feature-description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+</style>
+<body>
+    <!-- Click Overlay -->
+    <div id="clickOverlay">
+        <div class="click-content">
+            <h2>Welcome</h2>
+            <p>Click anywhere to continue</p>
+        </div>
+    </div>
+
+    <!-- Music Controls -->
+    <div id="musicControls" class="music-controls">
+        <button id="musicToggle" class="music-toggle" disabled>
+            <span id="musicIcon">🔇</span>
+        </button>
+        <span>Music</span>
+    </div>
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="travscot.mp3" type="audio/mpeg">
+    <source src="your-music.ogg" type="audio/ogg">
+</audio>
+
+
+    <div id="mainContent" class="blurred">
+    <div class="scroll-indicator">
+        <div class="scroll-progress"></div>
+    </div>
+    
+    <div class="animated-bg"></div>
+    <div class="grain"></div>
+    
+    <div class="orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <nav class="nav">
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#social" class="nav-link">Social</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">qou2</h1>
+                <h2 class="hero-subtitle">Front End Developer & Bot Creator</h2>
+                <p class="hero-description">
+                    Crafting innovative web applications and Discord bots with precision and creativity. 
+                    Passionate about clean code, user experience, and pushing the boundaries of what's possible 
+                    in modern web development.
+                </p>
+                <a href="#projects" class="cta-button">
+                    Explore My Work
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <img src="logo.gif" alt="BTTT" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        </div>
+                        <div>
+                            <h3 class="project-title">BPTT Web Platform</h3>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        A comprehensive web platform featuring modern UI/UX design, responsive layout, and seamless user interactions. 
+                        Built with cutting-edge web technologies and optimized for performance across all devices with advanced animations and interactive elements.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-number">12,796</span> lines of code
+                        </div>
+                        <div class="stat">
+                            Web Platform
+                        </div>
+                        <div class="stat">
+                            Modern Stack
+                        </div>
+                    </div>
+                    <a href="https://qou2.github.io/btt/" class="project-link" target="_blank" rel="noopener">
+                        View Live Site
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <img src="discord.png" alt="BTTT" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        </div>
+                        <div>
+                            <h3 class="project-title">BPTT Discord Bot</h3>
+                            <span class="badge">Discord Verified</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        A sophisticated Discord bot with advanced moderation and community management tools. 
+                        Officially verified by Discord, serving servers with high reliability, performance optimization, and seamless user experience.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-number">3,301</span> lines of code
+                        </div>
+                        <div class="stat">
+                            Discord Bot
+                        </div>
+                        <div class="stat">
+                            ✅ Verified
+                        </div>
+                        <div class="stat">
+                            High Performance
+                        </div>
+                    </div>
+<a href="#" class="project-link" onclick="openBotModal(); return false;">
+    Learn More
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+    </svg>
+</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <section class="social-section" id="social">
+        <div class="container">
+            <h2 class="section-title">Connect & Support</h2>
+            <p class="social-description">Follow me on social media or support my work through crypto donations</p>
+            
+            <!-- Circular Bio-Style Button Row -->
+            <div class="social-grid">
+                <!-- Discord -->
+                <a href="#" class="circular-button" onclick="copyToClipboard('@whoseqou2', 'Discord'); return false;" title="Discord: @whoseqou2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </a>
+
+       <!-- Bitcoin -->
+        <a href="#" class="circular-button bitcoin" onclick="copyToClipboard('1C6C21WnJAaipbEGz1nDEiqr4o3XNTPJQb', 'Bitcoin'); return false;" title="Bitcoin Address">
+            <img src="btc.png" alt="Bitcoin" />
+        </a>
+
+        <!-- Ethereum -->
+        <a href="#" class="circular-button" onclick="copyToClipboard('0x4258456433f8afea108f2717f06e35a1cbb74ace', 'Ethereum'); return false;" title="Ethereum Address">
+            <img src="eth.png" alt="Ethereum" />
+        </a>
+
+        <!-- Litecoin -->
+        <a href="#" class="circular-button" onclick="copyToClipboard('MAYhW2jgVw9hXYuwjLpktVsbKJ9avPmrjH', 'Litecoin'); return false;" title="Litecoin Address">
+            <img src="ltc.png" alt="Litecoin" />
+        </a>
+    </div>
+
+            <!-- Social Cards for Detail -->
+            <div class="social-cards">
+                <div class="social-card">
+                    <div class="social-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                        </svg>
+                    </div>
+                    <h3>Discord</h3>
+                    <p class="social-handle">@whoseqou2</p>
+                    <button class="copy-btn" onclick="copyToClipboard('@whoseqou2', 'Discord')">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                </div>
+
+                <div class="social-card">
+                    <div class="social-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p class="social-handle">github.com/qou2</p>
+                    <a href="https://github.com/qou2" class="copy-btn" target="_blank" rel="noopener">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                        Visit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <div class="container">
+    <footer class="footer" id="contact">
+            <div class="footer-content">
+                <p>© 2025 qou2. Crafted with passion and attention to detail.</p>
+                <p style="margin-top: 15px; color: #666;">Ready to collaborate? Let's build something extraordinary together.</p>
+                <div class="contact-info">
+                    <p>Discord: 
+                        <span class="discord-contact" onclick="copyToClipboard('@whoseqou2', 'Discord')">
+                            @whoseqou2
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <script>
+
+// Global variables for music and overlay functionality
+let musicPlaying = false;
+let audioContext = null;
+let hasUserInteracted = false;
+let audio = null;
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeScrollEffects();
+    initializeAnimations();
+    initializeOverlay();
+    initializeMusicControls();
+    initializeModals();
+    initializeParallax();
+    initializeKeyboardNavigation();
+    initializePerformanceOptimizations();
+    preloadAssets();
+});
+
+// Enhanced smooth scrolling
+function initializeScrollEffects() {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Scroll progress indicator
+    window.addEventListener('scroll', updateScrollProgress);
+}
+
+function updateScrollProgress() {
+    const scrolled = window.pageYOffset;
+    const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrolled / maxHeight) * 100;
+    const progressBar = document.querySelector('.scroll-progress');
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
+}
+
+// Enhanced intersection observer with staggered animations
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('animate');
+                }, index * 200);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.project-card, .section-title, .social-card').forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Parallax effects system
+function initializeParallax() {
+    let ticking = false;
+
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        // Parallax for orbs
+        document.querySelectorAll('.orb').forEach((orb, index) => {
+            const speed = 0.3 + (index * 0.1);
+            orb.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+        });
+        
+        // Parallax for floating elements
+        document.querySelectorAll('.floating-element').forEach((element, index) => {
+            const speed = 0.2 + (index * 0.05);
+            element.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+        });
+
+        ticking = false;
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', requestTick);
+
+    // Mouse move parallax effect
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        document.querySelectorAll('.orb').forEach((orb, index) => {
+            const speed = (index + 1) * 0.5;
+            const x = (mouseX - 0.5) * speed * 20;
+            const y = (mouseY - 0.5) * speed * 20;
+            orb.style.transform += ` translate3d(${x}px, ${y}px, 0)`;
+        });
+    });
+}
+
+// Click overlay functionality
+function initializeOverlay() {
+    const overlay = document.getElementById('clickOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const musicControls = document.getElementById('musicControls');
+
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            hasUserInteracted = true;
+            console.log('User interaction detected');
+            
+            // Hide overlay with animation
+            overlay.classList.add('hidden');
+            
+            // Remove blur from main content
+            if (mainContent) {
+                mainContent.classList.remove('blurred');
+            }
+            
+            // Show music controls and start music after overlay disappears
+            setTimeout(() => {
+                if (musicControls) {
+                    musicControls.classList.add('show');
+                }
+                
+                // Auto-start music
+                startMusic();
+            }, 500);
+        });
+    }
+}
+
+// Music control system - FIXED VERSION
+function initializeMusicControls() {
+    // Create audio element if it doesn't exist
+    audio = document.getElementById('backgroundMusic');
+    if (!audio) {
+        console.log('Creating audio element...');
+        audio = document.createElement('audio');
+        audio.id = 'backgroundMusic';
+        audio.loop = true;
+        audio.preload = 'auto';
+        audio.volume = 0.3;
+        
+        // Add the audio source
+        const source = document.createElement('source');
+        source.src = 'travscot.mp3';
+        source.type = 'audio/mpeg';
+        audio.appendChild(source);
+        
+        // Add to document
+        document.body.appendChild(audio);
+        console.log('Audio element created with source:', source.src);
+    }
+    
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicControls = document.getElementById('musicControls');
+
+    console.log('Initializing music controls...');
+    console.log('Audio element:', audio);
+    console.log('Audio src:', audio.src || audio.querySelector('source')?.src);
+
+    if (musicToggle) {
+        musicToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleMusic();
+        });
+    }
+
+    // Enhanced audio event handling
+    if (audio) {
+        audio.addEventListener('loadstart', function() {
+            console.log('Audio: Loading started');
+        });
+
+        audio.addEventListener('loadedmetadata', function() {
+            console.log('Audio: Metadata loaded');
+            console.log('Duration:', audio.duration);
+        });
+
+        audio.addEventListener('loadeddata', function() {
+            console.log('Audio: Data loaded successfully');
+        });
+
+        audio.addEventListener('canplay', function() {
+            console.log('Audio: Can start playing');
+        });
+
+        audio.addEventListener('canplaythrough', function() {
+            console.log('Audio: Can play through without buffering');
+            if (musicToggle) {
+                musicToggle.disabled = false;
+            }
+        });
+
+        audio.addEventListener('error', function(e) {
+            console.error('Audio Error Details:', {
+                error: e,
+                code: audio.error ? audio.error.code : 'No error code',
+                message: audio.error ? audio.error.message : 'No error message',
+                src: audio.src || audio.querySelector('source')?.src,
+                currentSrc: audio.currentSrc,
+                networkState: audio.networkState,
+                readyState: audio.readyState
+            });
+            
+            // Show specific error message based on error code
+            let errorMessage = 'Music file could not be loaded';
+            if (audio.error) {
+                switch(audio.error.code) {
+                    case 1: // MEDIA_ERR_ABORTED
+                        errorMessage = 'Audio loading was aborted';
+                        break;
+                    case 2: // MEDIA_ERR_NETWORK
+                        errorMessage = 'Network error while loading audio';
+                        break;
+                    case 3: // MEDIA_ERR_DECODE
+                        errorMessage = 'Audio file is corrupted or unsupported format';
+                        break;
+                    case 4: // MEDIA_ERR_SRC_NOT_SUPPORTED
+                        errorMessage = 'Audio file not found or format not supported';
+                        break;
+                }
+            }
+            
+            // Hide music controls if audio fails
+            if (musicControls) {
+                musicControls.style.display = 'none';
+            }
+            showToast(errorMessage);
+        });
+
+        audio.addEventListener('play', function() {
+            console.log('Audio: Started playing');
+            musicPlaying = true;
+            updateMusicIcon();
+        });
+
+        audio.addEventListener('pause', function() {
+            console.log('Audio: Paused');
+            musicPlaying = false;
+            updateMusicIcon();
+        });
+
+        audio.addEventListener('ended', function() {
+            console.log('Audio: Ended (should loop)');
+            // Should auto-restart due to loop attribute
+        });
+
+        // Check if audio source is valid
+        const audioSrc = audio.src || audio.querySelector('source')?.src;
+        if (audioSrc) {
+            console.log('Audio source found:', audioSrc);
+        } else {
+            console.warn('No audio source specified');
+            showToast('No audio source found');
+        }
+    } else {
+        console.warn('Audio element not found');
+    }
+}
+
+// Start music function - FIXED
+function startMusic() {
+    console.log('startMusic called');
+    console.log('hasUserInteracted:', hasUserInteracted);
+    
+    if (!hasUserInteracted) {
+        console.log('No user interaction yet, cannot start music');
+        return;
+    }
+    
+    if (!audio) {
+        console.error('Audio element not found');
+        showToast('Audio element not available');
+        return;
+    }
+
+    const audioSrc = audio.src || audio.querySelector('source')?.src;
+    if (!audioSrc || audioSrc === '') {
+        console.error('No audio source specified');
+        showToast('No music file specified - make sure travscot.mp3 exists');
+        return;
+    }
+
+    console.log('Attempting to start music:', audioSrc);
+    
+    // Set volume and attempt to play
+    audio.volume = 0.3;
+    
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            console.log('Music started successfully');
+            musicPlaying = true;
+            updateMusicIcon();
+            showToast('Music started');
+        }).catch(error => {
+            console.error('Music autoplay failed:', error);
+            musicPlaying = false;
+            updateMusicIcon();
+            
+            // Provide specific error feedback
+            if (error.name === 'NotAllowedError') {
+                showToast('Click the music button to start playing');
+            } else if (error.name === 'NotSupportedError') {
+                showToast('Audio format not supported');
+            } else {
+                showToast('Music failed to start: ' + error.message);
+            }
+        });
+    }
+}
+
+// Toggle music function - FIXED
+function toggleMusic() {
+    console.log('toggleMusic called');
+    
+    if (!hasUserInteracted) {
+        console.log('No user interaction, cannot toggle music');
+        showToast('User interaction required first');
+        return;
+    }
+
+    if (!audio) {
+        console.error('Audio element not found');
+        showToast('Audio not available');
+        return;
+    }
+
+    const audioSrc = audio.src || audio.querySelector('source')?.src;
+    if (!audioSrc || audioSrc === '') {
+        console.error('No audio source');
+        showToast('No music file loaded - check if travscot.mp3 exists');
+        return;
+    }
+
+    if (musicPlaying) {
+        // Pause music
+        audio.pause();
+        console.log('Music paused');
+        showToast('Music paused');
+    } else {
+        // Play music
+        audio.volume = 0.3;
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Music started via toggle');
+                showToast('Music playing');
+            }).catch(error => {
+                console.error('Music play failed:', error);
+                showToast('Music play failed: ' + error.message);
+            });
+        }
+    }
+}
+
+// Update music icon
+function updateMusicIcon() {
+    const musicIcon = document.getElementById('musicIcon');
+    if (musicIcon) {
+        musicIcon.textContent = musicPlaying ? '🔊' : '🔇';
+    }
+}
+
+// Copy to clipboard functionality
+function copyToClipboard(text, platform) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`${platform} address copied to clipboard!`);
+        }).catch(err => {
+            console.error('Clipboard write failed:', err);
+            fallbackCopyToClipboard(text, platform);
+        });
+    } else {
+        fallbackCopyToClipboard(text, platform);
+    }
+}
+
+// Fallback copy method
+function fallbackCopyToClipboard(text, platform) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showToast(`${platform} address copied to clipboard!`);
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        showToast('Copy failed - please copy manually');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Modal system - FIXED
+function initializeModals() {
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('botModal');
+        if (modal && e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+}
+
+// Bot modal functions - FIXED
+function openBotModal() {
+    console.log('openBotModal called');
+    const modal = document.getElementById('botModal');
+    if (modal) {
+        console.log('Modal found, showing...');
+        modal.classList.add('show');
+        modal.style.display = 'flex'; // Ensure it's visible
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error('Modal element not found');
+    }
+}
+
+function closeModal() {
+    console.log('closeModal called');
+    const modal = document.getElementById('botModal');
+    if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        // Hide modal after animation
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+}
+
+// Make modal functions globally available
+window.openBotModal = openBotModal;
+window.closeModal = closeModal;
+
+// Keyboard navigation support
+function initializeKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-nav');
+        }
+    });
+
+    document.addEventListener('mousedown', () => {
+        document.body.classList.remove('keyboard-nav');
+    });
+}
+
+// Performance optimizations
+function initializePerformanceOptimizations() {
+    // Add loading animation
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+        
+        // Start floating elements animation after load
+        document.querySelectorAll('.floating-element').forEach((element, index) => {
+            element.style.animationDelay = `${index * 2}s`;
+        });
+    });
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+    if (!toast || !toastMessage) return;
+
+    toastMessage.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+
+
+
+
+console.log('Script loaded successfully');   
+ </script>
+<div id="botModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()" style="left: 1rem !important; right: auto !important;">&times;</button>
+        
+        <div class="modal-header">
+            <div class="modal-icon">
+                <img src="discord.png" alt="BPTT Discord Bot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            </div>
+            <div>
+                <h3 class="modal-title">BPTT Discord Bot</h3>
+                <div class="modal-badges">
+                    <span class="modal-badge">✅ Discord Verified</span>
+                    <span class="modal-badge">High Performance</span>
+                    <span class="modal-badge">24/7 Uptime</span>
+                </div>
+            </div>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+            A comprehensive Discord bot built with advanced moderation capabilities, community engagement tools, 
+            and seamless server management features. Officially verified by Discord for reliability and performance.
+        </p>
+        <div class="stats-row">
+            <div class="stat-box">
+                <span class="stat-number">3,301</span>
+                <span class="stat-label">Lines of Code</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Uptime</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Commands</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">Reliability</span>
+            </div>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+                        <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+                        <path d="M15 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"/>
+                        <path d="M9 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"/>
+                    </svg>
+                </div>
+                <h4 class="feature-title">Custom made for BPTT</h4>
+                <p class="feature-description">Custom made for BPTT discord with Github and website integration.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h4 class="feature-title">Community Tools</h4>
+                <p class="feature-description">Welcome messages, role management, polls, and engagement features to build strong communities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                    </svg>
+                </div>
+                <h4 class="feature-title">Performance Monitoring</h4>
+                <p class="feature-description">Real-time server analytics, performance metrics, and detailed activity reporting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <circle cx="12" cy="16" r="1"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h4 class="feature-title">Custom server-made commands</h4>
+                <p class="feature-description">Custom made commands tailored to the needs of BPTT.</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--dark-border);">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                Interested in a custom made bot for your server?
+            </p>
+            <button class="cta-button" onclick="copyToClipboard('@whoseqou2', 'Discord')" 
+                    style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; 
+                           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                           color: white; border: none; border-radius: 12px; cursor: pointer; 
+                           font-weight: 600; transition: all 0.3s ease;">
+                Contact Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+<!-- Background Music (add before closing </body> tag) -->
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="travscot.mp3" type="audio/mpeg">
+</audio>
+</html>
