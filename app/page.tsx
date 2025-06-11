@@ -94,7 +94,7 @@ export default function Home() {
             <ProjectCard
               title="MCBETIERS Discord Bot"
               description="A sophisticated Discord bot with advanced moderation and community management tools. Officially verified by Discord, serving servers with high reliability, performance optimization, and seamless user experience."
-              stats={["3,301 lines of code", "Discord Bot", "✅ Verified", "High Performance"]}
+              stats={["4,217 lines of code", "Discord Bot", "✅ Verified", "High Performance"]}
               link="#"
               iconPath="/discord.png"
               isModal={true}
