@@ -88,7 +88,7 @@ export default function BotModal({ isOpen, onClose }: BotModalProps) {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <div className="bg-white/5 rounded-lg p-4 text-center">
-                <span className="block text-xl font-bold">3,301</span>
+                <span className="block text-xl font-bold">4,217</span>
                 <span className="text-xs text-white/50">Lines of Code</span>
               </div>
               <div className="bg-white/5 rounded-lg p-4 text-center">
