@@ -1,4 +1,4 @@
-  "use client"
+"use client"
 
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -115,7 +115,12 @@ export default function XboxAccountsPage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <p className="text-lg text-white/70">A collection of my Xbox accounts, Probably only gonna list 4c's as thats what i mainly collect :p</p>
+          <p className="text-lg text-white/70">
+            A collection of my Xbox accounts, Probably only gonna list 4c's as thats what i mainly collect :p
+          </p>
+          <p className="mt-2 text-xl font-semibold text-purple-400">
+            Total Accounts: <span className="text-pink-500">{xboxAccounts.length}</span>
+          </p>
         </motion.div>
 
         <motion.div
