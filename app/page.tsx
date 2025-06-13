@@ -65,13 +65,22 @@ export default function Home() {
             Crafting innovative web applications and Discord bots with precision and creativity. Passionate about clean
             code, user experience, and pushing the boundaries of what's possible in modern web development.
           </p>
-          <Link
-            href="#projects"
-            className="group inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
-          >
-            Explore My Work
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="#projects"
+              className="group inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
+            >
+              Explore My Work
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+            <Link
+              href="/xbox-accounts"
+              className="group inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 rounded-full text-white font-medium hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 hover:-translate-y-1"
+            >
+              My Xbox Accounts
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
