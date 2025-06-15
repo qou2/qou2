@@ -62,8 +62,7 @@ export default function Home() {
           </h1>
           <h2 className="text-2xl md:text-3xl font-medium text-white/80 mb-6">Front End Developer & Bot Creator</h2>
           <p className="text-lg text-white/60 max-w-2xl mb-10">
-            Crafting innovative web applications and Discord bots with precision and creativity. Passionate about clean
-            code, user experience, and pushing the boundaries of what's possible in modern web development.
+            i make website and discord bot :thumbs_up:
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -94,7 +93,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             <ProjectCard
               title="MCBETIERS Web Platform"
-              description="A comprehensive web platform featuring modern UI/UX design, responsive layout, and seamless user interactions. Built with cutting-edge web technologies and optimized for performance across all devices."
+              description="fuckass website made in 2 hours at 4am with shit html styling"
               stats={["12,796 lines of code", "Web Platform", "Modern Stack"]}
               link="https://mcbetiers.com/"
               iconPath="/logo.gif"
@@ -102,7 +101,7 @@ export default function Home() {
 
             <ProjectCard
               title="MCBETIERS Discord Bot"
-              description="A sophisticated Discord bot with advanced moderation and community management tools. Officially verified by Discord, serving servers with high reliability, performance optimization, and seamless user experience."
+              description="an actual decent discord bot, moderation, github updater, image generation"
               stats={["4,217 lines of code", "Discord Bot", "✅ Verified", "High Performance"]}
               link="#"
               iconPath="/discord.png"
@@ -192,11 +191,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 items-center">
             <div>
-              <p className="text-white/50 text-sm">© 2025 qou2. Crafted with passion and attention to detail.</p>
+              <p className="text-white/50 text-sm">© 2025 qou2</p>
             </div>
             <div className="text-center">
               <p className="text-white/50 text-sm">
-                Ready to collaborate? Let's build something extraordinary together.
+                Ready to collaborate? Pop me a DM
               </p>
             </div>
             <div className="flex justify-end">
