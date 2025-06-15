@@ -81,8 +81,8 @@ export default function BotModal({ isOpen, onClose }: BotModalProps) {
             </div>
 
             <p className="text-white/70 mb-8">
-              A comprehensive Discord bot built with advanced moderation capabilities, community engagement tools, and
-              seamless server management features. Officially verified by Discord for reliability and performance.
+              A cool Discord bot built with moderation capabilities, community engagement tools, and
+              seamless server management features. Officially verified by Discord for reliability and performance (i sent them my id)
             </p>
 
             {/* Stats */}
@@ -92,7 +92,7 @@ export default function BotModal({ isOpen, onClose }: BotModalProps) {
                 <span className="text-xs text-white/50">Lines of Code</span>
               </div>
               <div className="bg-white/5 rounded-lg p-4 text-center">
-                <span className="block text-xl font-bold">24/7</span>
+                <span className="block text-xl font-bold">23/7</span>
                 <span className="text-xs text-white/50">Uptime</span>
               </div>
               <div className="bg-white/5 rounded-lg p-4 text-center">
@@ -159,7 +159,7 @@ export default function BotModal({ isOpen, onClose }: BotModalProps) {
                   </svg>
                 </div>
                 <h4 className="text-lg font-medium mb-2">Custom server-made commands</h4>
-                <p className="text-sm text-white/60">Custom made commands tailored to the needs of BPTT.</p>
+                <p className="text-sm text-white/60">Custom made commands tailored to the needs of MCBETIERS.</p>
               </div>
             </div>
 
