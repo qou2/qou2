@@ -84,7 +84,6 @@ export default function Home() {
           </div>
 
           <div className="space-y-8">
-            <div className="md:ml-0">
               <ProjectCard
                 title="MCBETIERS Web Platform"
                 description="built this entire website in like 2 hours at 4am. it's honestly pretty terrible code but it works and looks decent enough. sometimes that's all you need."
@@ -93,9 +92,7 @@ export default function Home() {
                 iconPath="/logo.gif"
                 tech={["html", "css", "Vercel"]}
               />
-            </div>
 
-            <div className="md:ml-12">
               <ProjectCard
                 title="MCBETIERS Discord Bot"
                 description="actually spent time on this one. handles moderation, has github integration, generates images, and got discord verification"
@@ -108,7 +105,6 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
       </section>
 
       <section id="contact" className="py-20 px-7">
