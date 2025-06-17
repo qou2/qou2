@@ -48,10 +48,10 @@ export default function Home() {
           <div className="mb-8">
             <h1 className="text-5xl md:text-7xl font-bold mb-5 text-white leading-tight">hey, i'm qou2</h1>
             <h2 className="text-xl md:text-2xl text-white/70 mb-7 font-normal max-w-2xl">
-              i build websites and discord bots when i'm not procrastinating
+              i build websites and discord bots sometimes
             </h2>
             <p className="text-base text-white/50 max-w-xl leading-relaxed mb-9">
-              mostly frontend stuff with react/next.js. sometimes i make discord bots that actually work.
+              mostly frontend stuff with react/next.js and sometimes i make discord bots
             </p>
           </div>
 
