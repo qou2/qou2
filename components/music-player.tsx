@@ -65,36 +65,38 @@ export default function MusicPlayer({ audioFile }: MusicPlayerProps) {
     return () => window.removeEventListener("userInteraction", handleUserInteraction)
   }, [toast])
 
-  const toggleMusic = () => {
-    if (!audioRef.current) return
+const toggleMusic = () => {
+  if (!audioRef.current) return
 
-    if (isPlaying) {
-      audioRef.current.pause()
-      setIsPlaying(false)
-      toast({
-        title: "Music paused",
-      })
-    } else {
-      const playPromise = audioRef.current.play()
+  if (isPlaying) {
+    audioRef.current.pause()
+    setIsPlaying(false)
+    toast({
+      title: "Music paused",
+    })
+  } else {
+    const playPromise = audioRef.current.play()
 
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true)
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true)
+          if (hasInteracted) {
             toast({
               title: "Music playing",
             })
+          }
+        })
+        .catch((error) => {
+          console.error("Play failed:", error)
+          toast({
+            title: "Playback failed",
+            description: "Please try again",
           })
-          .catch((error) => {
-            console.error("Play failed:", error)
-            toast({
-              title: "Playback failed",
-              description: "Please try again",
-            })
-          })
-      }
+        })
     }
   }
+}
 
   return (
     <AnimatePresence>
