@@ -103,6 +103,7 @@ export default function XboxAccountsPage() {
     "g6s2",
     "akadonutt",
     "whoseqou2",
+    "Zeqa S9",
   ]
 
   const filteredAccounts = xboxAccounts.filter((account) => {
