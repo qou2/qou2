@@ -6,6 +6,8 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { motion } from "framer-motion"
 import BotModal from "./bot-modal"
+import McbetiersModal from "./mcbetiers-modal"
+
 interface ProjectCardProps {
   title: string
   description: string
@@ -16,6 +18,7 @@ interface ProjectCardProps {
   badge?: string
   tech?: string[]
 }
+
 export default function ProjectCard({
   title,
   description,
@@ -26,13 +29,20 @@ export default function ProjectCard({
   badge,
   tech = [],
 }: ProjectCardProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isBotModalOpen, setIsBotModalOpen] = useState(false)
+  const [isMcbetiersModalOpen, setIsMcbetiersModalOpen] = useState(false)
+
   const handleClick = (e: React.MouseEvent) => {
     if (isModal) {
       e.preventDefault()
-      setIsModalOpen(true)
+      if (title.includes("MCBETIERS")) {
+        setIsMcbetiersModalOpen(true)
+      } else {
+        setIsBotModalOpen(true)
+      }
     }
   }
+
   return (
     <>
       <motion.div
@@ -93,7 +103,8 @@ export default function ProjectCard({
           <ArrowUpRight className="w-4 h-4" />
         </Link>
       </motion.div>
-      {isModal && <BotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
+      <BotModal isOpen={isBotModalOpen} onClose={() => setIsBotModalOpen(false)} />
+      <McbetiersModal isOpen={isMcbetiersModalOpen} onClose={() => setIsMcbetiersModalOpen(false)} />
     </>
   )
 }
