@@ -78,33 +78,33 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">stuff i've built</h2>
-            <p className="text-white/60 text-base max-w-2xl">
-              here's some projects
-            </p>
+            <p className="text-white/60 text-base max-w-2xl">here's some projects</p>
           </div>
 
           <div className="space-y-8">
-              <ProjectCard
-                title="MCBETIERS Web Platform"
-                description="built this entire website in like 2 hours at 4am. it's honestly pretty terrible code but it works and looks decent enough. sometimes that's all you need."
-                stats={["12,796 lines", "html", "NOT next.js", "kinda uggo"]}
-                link="https://mcbetiers.com/"
-                iconPath="/logo.gif"
-                tech={["html", "css", "Vercel"]}
-              />
+            <ProjectCard
+              title="MCBETIERS Web Platform"
+              description="completely rebuilt the entire platform from scratch using vite. went from terrible html/css to a proper modern web app with better architecture and actually maintainable code."
+              stats={["vite", "rebuilt", "actually good code", "modern stack"]}
+              link="#"
+              iconPath="/logo.gif"
+              isModal={true}
+              badge="Rebuilt"
+              tech={["Vite", "TypeScript", "Tailwind CSS", "PostgreSQL"]}
+            />
 
-              <ProjectCard
-                title="MCBETIERS Discord Bot"
-                description="actually spent time on this one. handles moderation, has github integration, generates images, and got discord verification"
-                stats={["4,217 lines", "discord.js", "verified ✓", "actually good"]}
-                link="#"
-                iconPath="/discord.png"
-                isModal={true}
-                badge="Discord Verified"
-                tech={["Node.js", "Discord.js", "MongoDB"]}
-              />
-            </div>
+            <ProjectCard
+              title="MCBETIERS Discord Bot"
+              description="actually spent time on this one. handles moderation, has github integration, generates images, and got discord verification"
+              stats={["4,217 lines", "discord.js", "verified ✓", "actually good"]}
+              link="#"
+              iconPath="/discord.png"
+              isModal={true}
+              badge="Discord Verified"
+              tech={["Node.js", "Discord.js", "MongoDB"]}
+            />
           </div>
+        </div>
       </section>
 
       <section id="contact" className="py-20 px-7">
