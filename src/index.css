@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* qou2.xyz Minimal Black Design System */
+
+@layer base {
+  :root {
+    /* Pure Black Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    /* Cards & Surfaces */
+    --card: 0 0% 2%;
+    --card-foreground: 0 0% 100%;
+    --card-border: 0 0% 15%;
+
+    /* Interactive Elements */
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --primary-hover: 0 0% 90%;
+
+    /* Accent Colors */
+    --accent: 0 0% 5%;
+    --accent-foreground: 0 0% 100%;
+    --accent-border: 0 0% 20%;
+
+    /* Muted Elements */
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 70%;
+
+    /* Borders & Inputs */
+    --border: 0 0% 15%;
+    --input: 0 0% 8%;
+    --ring: 0 0% 100%;
+
+    /* Glow Effects */
+    --glow-primary: 0 0% 100%;
+    --glow-subtle: 0 0% 50%;
+
+    --radius: 0.5rem;
+
+    /* Tech Stack Colors */
+    --tech-react: 193 100% 70%;
+    --tech-node: 120 100% 40%;
+    --tech-typescript: 211 100% 65%;
+    --tech-database: 280 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+}
+
+@layer components {
+  .portfolio-button {
+    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium transition-all duration-300 focus:outline-none;
+  }
+
+  .portfolio-button-primary {
+    @apply portfolio-button bg-black text-white border border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:border-white/70 hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] hover:bg-white/5;
+  }
+
+  .portfolio-button-secondary {
+    @apply portfolio-button bg-black text-white border border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:bg-white/5;
+  }
+
+  .project-card {
+    @apply bg-black border border-white/15 rounded-lg p-6 transition-all duration-500 shadow-[0_0_15px_rgba(255,255,255,0.08)] hover:border-white/35 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:transform hover:scale-[1.02];
+  }
+
+  .fade-in {
+    @apply animate-[fadeIn_0.8s_ease-out_forwards];
+  }
+
+  .slide-up {
+    @apply animate-[slideUp_0.6s_ease-out_forwards];
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .tech-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-white/5 text-white/80 border border-white/10;
+  }
+
+  .tech-icon {
+    @apply w-4 h-4 opacity-80;
+  }
+
+
+  .header-blur {
+    @apply backdrop-blur-md bg-black/80 border-white/10;
+  }
+}
