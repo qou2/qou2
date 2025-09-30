@@ -58,7 +58,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           <p className="text-xs text-white/40">
-            © 2025 qou2. 
+            © 2025 qou2.    Z♡
           </p>
           
           <div className="flex items-center gap-2">
