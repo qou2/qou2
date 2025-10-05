@@ -11,29 +11,20 @@ export default async function handler(req, res) {
   try {
     const apiUrl = 'https://qou2.xo.je/api.php';
     
+    // Get the request body (Vercel automatically parses it)
+    const body = req.body;
+    
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(body),
     });
 
-    const text = await response.text();
+    const data = await response.json();
+    return res.status(200).json(data);
     
-    // Try to parse as JSON
-    try {
-      const data = JSON.parse(text);
-      return res.status(200).json(data);
-    } catch (e) {
-      // If not JSON, return the raw response for debugging
-      return res.status(500).json({ 
-        success: false, 
-        error: 'API returned non-JSON response',
-        response: text.substring(0, 500),
-        status: response.status
-      });
-    }
   } catch (error) {
     return res.status(500).json({ 
       success: false, 
