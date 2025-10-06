@@ -9,7 +9,7 @@ const Downloads = () => {
       title: "qou2 Checker",
       version: "v2.4.0",
       description: "High-performance Xbox gamertag availability checker with proxy rotation and Discord webhooks",
-      file: "http://downloads.qou2.xyz/qou2-checker.zip",
+      file: "https://downloads.qou2.xyz/qou2-checker.zip",
       size: "36.8 MB"
     }
   ];
