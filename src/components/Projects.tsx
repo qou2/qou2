@@ -4,6 +4,7 @@ import ProjectModal, { Project } from "./ProjectModal";
 import webIcon from "@/assets/web-icon.jpg";
 import botIcon from "@/assets/bot-icon.jpg";
 import siteIcon from "@/assets/site-icon.jpg";
+import q2Icon from "@/assets/q2.png";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -161,6 +162,46 @@ const Projects = () => {
           }
         ],
         hasContactButton: true
+      }
+    },
+    {
+      id: "qou2-checker",
+      title: "qou2 Checker",
+      subtitle: "High-performance Xbox gamertag availability checker with proxy rotation, Discord webhooks, and real-time monitoring. Multi-threaded architecture with customizable themes and comprehensive statistics tracking.",
+      description: "Xbox gamertag checker with advanced features",
+      techStack: ["Python", "PyQt5", "Multi-threading", "2400+ lines", "v2.4.0"],
+      icon: q2Icon,
+      details: {
+        title: "qou2 Checker",
+        subtitle: "High-Performance Xbox Gamertag Availability Checker",
+        description: "High-performance Xbox gamertag availability checker with proxy rotation, Discord webhooks, and real-time monitoring. Multi-threaded architecture with customizable themes and comprehensive statistics tracking.",
+        features: [
+          "Multi-threaded Checking System:\nConcurrent gamertag checking with 1-10 configurable threads, customizable character length (3-15) and check amounts (1-10,000), letter-only or alphanumeric generation modes, smart delay randomization to avoid rate limiting, real-time progress tracking with current tag display",
+          "Proxy Management:\nBuilt-in proxy verification system that tests functionality before use, supports both authenticated and standard proxies (ip:port or ip:port:user:pass), automatic rotation through verified proxy list, saves working proxies for future sessions, prevents IP blocks and rate limiting",
+          "Discord Integration:\nWebhook notifications when available gamertags are found, auto-save system for available results, exports to text files for easy access, real-time console logging with color-coded messages",
+          "Live Theme Customization:\nRGB color picker with hex input and sliders, dual-color gradient system with animation, adjustable border radius (0-30px), animated floating particles, dark mode optimized interface, custom styled frameless window with glow effects",
+          "User System:\nSecure authentication with access key registration, persistent login with 'Remember Me' option, per-user statistics and settings, session-based tracking (checked/available/taken/errors)"
+        ],
+        techDetails: [
+          {
+            category: "Core Technologies",
+            items: ["Python 3.x", "PyQt5", "SQLite", "Multi-threading"]
+          },
+          {
+            category: "Features",
+            items: ["Proxy Verification", "Discord Webhooks", "Real-time Logging", "Theme Customizer"]
+          },
+          {
+            category: "UI/UX",
+            items: ["Frameless Design", "Animated Gradients", "Floating Particles", "Dark Theme"]
+          },
+          {
+            category: "Stats",
+            items: ["2400+ lines of code", "Version 2.4.0", "Multi-threaded checker"]
+          }
+        ],
+        hasContactButton: false,
+        liveUrl: "/downloads"
       }
     }
   ];
