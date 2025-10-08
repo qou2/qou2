@@ -123,7 +123,9 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
                 <a href={project.details.liveUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-4 h-4" />
                   {project.details.liveUrl.includes('mcbetiers') ? 'visit mcbetiers.com' : 
-                   project.details.liveUrl.includes('milkyclan') ? 'View Live Site (milkyclan.com)' : 'View Live Site'}
+                   project.details.liveUrl.includes('milkyclan') ? 'View Live Site (milkyclan.com)' : 
+                   project.details.liveUrl.includes('github.com') ? 'Open Source' :
+                   project.details.liveUrl.includes('/downloads') ? 'View Downloads' : 'View Live Site'}
                 </a>
               </Button>
             )}
