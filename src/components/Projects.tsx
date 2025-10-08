@@ -5,6 +5,7 @@ import webIcon from "@/assets/web-icon.jpg";
 import botIcon from "@/assets/bot-icon.jpg";
 import siteIcon from "@/assets/site-icon.jpg";
 import q2Icon from "@/assets/q2.png";
+import xboxIcon from "@/assets/xbox.png";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -202,6 +203,57 @@ const Projects = () => {
         ],
         hasContactButton: false,
         liveUrl: "/downloads"
+      }
+    },
+    {
+      id: "xbl-web-api",
+      title: "xbl-web-api",
+      subtitle: "RESTful API wrapper for Xbox Live services with comprehensive endpoint coverage, async architecture, and intelligent caching. Features automated token refresh, Prometheus metrics integration, and multi-route support for achievements, profiles, presence, and more.",
+      description: "High-performance Xbox Live REST API wrapper",
+      techStack: ["Python", "Quart", "Async/Await", "REST API", "3000+ lines", "v2.1.0", "Open Source"],
+      icon: xboxIcon,
+      details: {
+        title: "xbl-web-api",
+        subtitle: "High-Performance Xbox Live RESTful API Wrapper",
+        description: "RESTful API wrapper for Xbox Live services with comprehensive endpoint coverage, async architecture, and intelligent caching. Features automated token refresh, Prometheus metrics integration, and multi-route support for achievements, profiles, presence, and more.",
+        features: [
+          "Xbox Live Integration:\nFull Xbox Live API v2 support with automated authentication, OAuth2 token management with auto-refresh system, saves refreshed tokens to disk automatically, supports gamertag, XUID, achievements, presence, profile data, user statistics and game catalog endpoints, legacy Xbox 360 search support",
+          "Async Architecture:\nBuilt on Quart ASGI framework for high performance, multi-threaded request handling with asyncio, scheduled background tasks for token refresh (every 1 minute), cache cleanup jobs (every 5 minutes), nested event loop support with nest_asyncio for Windows compatibility",
+          "Intelligent Caching System:\nDisk-based caching with configurable TTL, automatic expired item removal, cache size metrics tracking, different cache durations per endpoint type (1 day for static data, 30 days for legacy content), reduces API calls and improves response times",
+          "SSL & Authentication Fixes:\nBypasses Windows SSL certificate validation issues, custom SSL context for Xbox Live compatibility, resolves SSLError and certificate verification failures, includes manual authentication script for initial setup, cross-platform token storage with environment variables",
+          "Metrics & Monitoring:\nPrometheus metrics integration for API monitoring, request counting and timing, cache hit/miss tracking, thread-safe metrics collection, dedicated metrics endpoint for scraping",
+          "Routes:\n/titleinfo/<int:titleid> - Get title information by its title ID\n/legacysearch/<str:query> - Search the Xbox 360 Marketplace\n/gamertag/check/<str:username> - Check if gamertag is available or taken\n/usercolors/define/<str:primary>/<str:secondary>/<str:tertiary> - Get SVG representation of defined colors\n/usercolors/get/xuid/<int:xuid> - Get SVG representation of user's colors\n/usercolors/get/gamertag/<gamertag> - Get SVG representation of user's colors",
+          "Profiles:\n/profile/xuid/<int:xuid> - Get profile by user's XUID\n/profile/gamertag/<str:gamertag> - Get profile by user's gamertag\n/profile/settings/xuid/<int:xuid> - Get profile settings by XUID\n/profile/settings/gamertag/<str:gamertag> - Get profile settings by gamertag",
+          "Friends:\n/friends/summary/xuid/<int:xuid> - Get user's friend summary by XUID\n/friends/summary/gamertag/<gamertag> - Get user's friend summary by gamertag",
+          "Presence:\n/presence/xuid/<int:xuid> - Get user's presence by XUID\n/presence/gamertag/<str:gamertag> - Get user's presence by gamertag",
+          "User Stats:\n/userstats/xuid/<int:xuid>/titleid/<int:titleid> - Get user's stats by XUID and Title ID\n/userstats/gamertag/<str:gamertag>/titleid/<int:titleid> - Get user's stats by gamertag and Title ID",
+          "XUIDs:\n/xuid/<str:gamertag> - Get user's XUID by gamertag\n/xuid/<str:gamertag>/raw - Get user's XUID by gamertag (returns as text)",
+          "Achievements:\n/achievements/1/recent/<int:xuid> - Recent Xbox One achievements\n/achievements/360/recent/<int:xuid> - Recent Xbox 360 achievements\n/achievements/1/titleprogress/<int:xuid>/<int:titleid> - All Xbox One achievements (unlocked and locked)\n/achievements/360/titleprogress/all/<int:xuid>/<int:titleid> - All Xbox 360 achievements\n/achievements/360/titleprogress/earned/<int:xuid>/<int:titleid> - Earned Xbox 360 achievements\n/achievements/1/titleprogress/detail/<int:xuid>/<uuid:scid>/<int:achievementid> - Xbox One achievement details"
+        ],
+        techDetails: [
+          {
+            category: "Core Technologies",
+            items: ["Python 3.11", "Quart 0.19+", "aiohttp", "Hypercorn ASGI"]
+          },
+          {
+            category: "Features",
+            items: ["OAuth2 Authentication", "Auto Token Refresh", "Proxy Rotation Support", "Disk Caching", "Prometheus Metrics", "APScheduler Jobs"]
+          },
+          {
+            category: "Architecture",
+            items: ["Async/Await Pattern", "Multi-threading", "Event Loop Management", "REST API Design"]
+          },
+          {
+            category: "Monitoring",
+            items: ["Request Logging", "Cache Analytics", "Error Tracking", "Health Checks"]
+          }
+        ],
+        stats: [
+          { label: "lines of code", value: "3000+" },
+          { label: "version", value: "2.1.0" },
+          { label: "license", value: "MIT" }
+        ],
+        liveUrl: "https://github.com/qou2/xbl-web-api"
       }
     }
   ];
